@@ -1,6 +1,6 @@
 //SPA
 //SSR
-//SSG
+//SSG => só funciona em produção
 
 import { useEffect } from "react";
 
@@ -25,3 +25,5 @@ export async function getStaticProps() {
     revalidate: 60 * 60 * 8,
   };
 }
+
+//yarn start => build
