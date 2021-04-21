@@ -1,3 +1,5 @@
+import { Header } from "../components/Header.tsx";
+
 export default function Home() {
-  return <h1>Hello</h1>;
+  return <Header />;
 }
