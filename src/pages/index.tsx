@@ -1,5 +1,5 @@
 import { Header } from "../components/Header.tsx";
 
 export default function Home() {
-  return <Header />;
+  return <div>Index</div>;
 }
