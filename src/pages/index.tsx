@@ -1,10 +1,20 @@
+import { GetStaticProps } from "next";
+import { api } from "../service/api";
 //SPA
 //SSR
 //SSG => só funciona em produção
 
-import { useEffect } from "react";
+type Episodes = {
+  id: string;
+  title: string;
+  members: string;
+};
 
-export default function Home(props) {
+type HomeProps = {
+  episodes: Episodes[];
+};
+
+export default function Home(props: HomeProps) {
   console.log(props);
   // useEffect(() => {
   //   fetch("http://localhost:3333/episodes")
@@ -14,9 +24,16 @@ export default function Home(props) {
   return <div>{JSON.stringify(props)}</div>;
 }
 
-export async function getStaticProps() {
-  const response = await fetch("http://localhost:3333/episodes");
-  const data = await response.json();
+export const getStaticProps: GetStaticProps = async () => {
+  //?_limit=12&_sort=published_at&_order=desc
+  const response = await api.get("episodes", {
+    params: {
+      _limit: 12,
+      _sort: "published_at",
+      _order: "desc",
+    },
+  });
+  const data = await response.data;
 
   return {
     props: {
@@ -24,6 +41,6 @@ export async function getStaticProps() {
     },
     revalidate: 60 * 60 * 8,
   };
-}
+};
 
 //yarn start => build
